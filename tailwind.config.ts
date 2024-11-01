@@ -33,9 +33,9 @@ const config: Config = {
         }
       },
       screens : {
-        "web-lg" : "1920px",
-        "web-md" : "744px",
-        "web-sm" : "375px"
+        "desktop" : "1920px",
+        "tablet" : "744px",
+        "mobile" : "375px"
       }
     },
   },
