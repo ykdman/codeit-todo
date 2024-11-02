@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
-import Header from "@/components/header";
+import Header from "@/components/Header";
+
 
 
 export const metadata: Metadata = {
@@ -14,9 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html >
+    <html lang="ko">
       <body
-        className="w-full h-full"
+        className="w-full h-full grid-cols-12"
       >
         <Header />
         {children}
