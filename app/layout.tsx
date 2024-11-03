@@ -16,10 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body
-        className="w-full h-full grid-cols-12"
+      <body className="container"
       >
         <Header />
+        
         {children}
       </body>
     </html>

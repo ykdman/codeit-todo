@@ -3,12 +3,15 @@ import Logo from "./Logo";
 
 export default function Header () {
   return (
-    <header className="w-full flex flex-col px-6 py-[10px]">
-      <div className="flex items-center justify-start">
+    <>
+    <header className="col-start-1 col-end-3 py-[10px]">
+      <div className="">
         <Logo/>
       </div>
-      <hr />
+    
     </header>
+    </>
+    
   )
   
 }

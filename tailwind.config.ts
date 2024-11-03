@@ -36,6 +36,11 @@ const config: Config = {
         "desktop" : "1920px",
         "tablet" : "744px",
         "mobile" : "375px"
+      },
+      gridTemplateColumns : {
+        12 : "repeat(12, 1fr)",
+        8 : "repeat(8, 1fr)",
+        4 : "repeat(4, 1fr)"
       }
     },
   },
