@@ -9,7 +9,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function DetailWidget({ todo }: { todo: Todo }) {
-  const [currentTodo, setCurrentTodo] = useState<Todo>(todo);
+  const [currentTodo, setCurrentTodo] = useState<Todo>(() => todo);
+  console.log("투두", currentTodo);
 
   const router = useRouter();
 
@@ -50,6 +51,20 @@ export default function DetailWidget({ todo }: { todo: Todo }) {
     }
   };
 
+  const updateImageHandler = async (url: string) => {
+    if (currentTodo.id) {
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${currentTodo.id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "PATCH",
+        body: JSON.stringify({ ...currentTodo, imageUrl: url }),
+      });
+
+      router.refresh();
+    }
+  };
+
   return (
     <>
       <div
@@ -58,7 +73,10 @@ export default function DetailWidget({ todo }: { todo: Todo }) {
           "desktop:flex-row tablet:flex-col mobile:flex-col",
         )}
       >
-        <ImageItem />
+        <ImageItem
+          currentTodo={currentTodo}
+          imageHanlder={updateImageHandler}
+        />
         <TodoMemo currentTodo={currentTodo} changeHandler={changeMemoHandler} />
       </div>
       <div
