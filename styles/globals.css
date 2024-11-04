@@ -30,6 +30,10 @@
     grid-column-start : 1;
     grid-column-end : 13;
   }
+
+  .note-back {
+    background-image : url('/public/todo-memo.svg')
+  }
 }
 
 html, body {
@@ -45,12 +49,6 @@ body {
 }
 
 .container {
-  /* max-width: 120rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  
-  margin: 0 auto;
-  padding: 0 1.5rem; */
   max-width: 120rem;
   margin: 0 auto;
   padding: 0 1.5rem;
@@ -74,7 +72,7 @@ body {
     .container {
       display: grid;
       grid-template-columns: repeat(8, 73px);
-      grid-template-rows : 60px 100px 1fr;
+      grid-template-rows : 60px 100px 1fr; 
       column-gap: 16px; 
     }
   }

@@ -25,7 +25,7 @@ export async function createTodo({name} : CreateTodoItemDto) {
   return response.json();
 }
 
-export async function getTodoById( {id} : {id : number}) {
+export async function getTodoById( {id} : {id : number}) : Promise<Todo | null>{
   const todo = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/items/${id}`);
 
   if (todo.status === 404) {
@@ -35,13 +35,14 @@ export async function getTodoById( {id} : {id : number}) {
   return await todo.json();
 }
 
-export async function updateTodoById( {id, name, memo, imageUrl, isCompleted} : Todo) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/items/${id}`, {
+export async function updateTodoById(todo : Todo) {
+  console.log("리얼서버", todo)
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/items/${todo.id}`, {
     headers : {
       "Content-Type" : "application/json"
     },
     method : "PATCH",
-    body : JSON.stringify({name, memo, imageUrl, isCompleted}),
+    body : JSON.stringify({name : todo.name, memo:todo.memo, imageUrl:todo.imageUrl, isCompleted:todo.isCompleted}),
   })
 
   if (response.status === 404) {
