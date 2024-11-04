@@ -4,31 +4,80 @@ import EditTodoButton from "@/components/EditTodoButton";
 import ImageItem from "@/components/ImageItem";
 import TodoMemo from "@/components/TodoMemo";
 import { Todo } from "@/types";
+import clsx from "clsx";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function DetailWidget({todo} : {todo : Todo}) {
+export default function DetailWidget({ todo }: { todo: Todo }) {
   const [currentTodo, setCurrentTodo] = useState<Todo>(todo);
 
-  const changeMemoHandler = (e : React.ChangeEvent<HTMLTextAreaElement>) => {
-    if(currentTodo){
+  const router = useRouter();
+
+  const changeMemoHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (currentTodo) {
       setCurrentTodo({
         ...currentTodo,
-        memo : e.target.value
-      })
+        memo: e.target.value,
+      });
     }
-  }
+  };
 
-  return(
+  const patchMemoHandler = async () => {
+    if (!currentTodo.memo) {
+      return;
+    }
+
+    if (currentTodo.id) {
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${currentTodo.id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "PATCH",
+        body: JSON.stringify({ ...currentTodo }),
+      });
+
+      router.refresh();
+    }
+  };
+
+  const deleteTodoHandler = async () => {
+    if (currentTodo.id) {
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${currentTodo.id}`, {
+        method: "DELETE",
+      });
+
+      router.push("/");
+    }
+  };
+
+  return (
     <>
-    <div className="w-full flex flex-row justify-center items-center mt-6 tablet:flex-col">
-    <ImageItem />          
-    <TodoMemo currentTodo={currentTodo} changeHandler={changeMemoHandler}/>
-    </div>
-    <div className="w-full my-6 flex desktop:justify-end items-center tablet:justify-center mobile:justify-center">
-      <EditTodoButton isEdit={true} isComplete={todo.isCompleted}/>
-      <EditTodoButton isEdit={false} isComplete={todo.isCompleted}/>
-    </div>
+      <div
+        className={clsx(
+          "mt-6 flex w-full items-center justify-center tablet:border-2",
+          "desktop:flex-row tablet:flex-col mobile:flex-col",
+        )}
+      >
+        <ImageItem />
+        <TodoMemo currentTodo={currentTodo} changeHandler={changeMemoHandler} />
+      </div>
+      <div
+        className={clsx(
+          "my-6 flex w-full items-center",
+          "desktop:justify-end tablet:justify-center mobile:justify-center",
+        )}
+      >
+        <EditTodoButton
+          isEdit={true}
+          isComplete={todo.isCompleted}
+          patchHandler={patchMemoHandler}
+        />
+        <EditTodoButton
+          isEdit={false}
+          isComplete={todo.isCompleted}
+          deleteHandler={deleteTodoHandler}
+        />
+      </div>
     </>
-  
-  )
+  );
 }
