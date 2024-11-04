@@ -63,20 +63,22 @@ export default function DetailWidget({ todo }: { todo: Todo }) {
       </div>
       <div
         className={clsx(
-          "my-6 flex w-full items-center",
+          "my-6 flex w-full items-center justify-end",
           "desktop:justify-end tablet:justify-center mobile:justify-center",
         )}
       >
-        <EditTodoButton
-          isEdit={true}
-          isComplete={todo.isCompleted}
-          patchHandler={patchMemoHandler}
-        />
-        <EditTodoButton
-          isEdit={false}
-          isComplete={todo.isCompleted}
-          deleteHandler={deleteTodoHandler}
-        />
+        <div className="flex justify-items-end">
+          <EditTodoButton
+            isEdit={true}
+            isComplete={todo.isCompleted}
+            patchHandler={patchMemoHandler}
+          />
+          <EditTodoButton
+            isEdit={false}
+            isComplete={todo.isCompleted}
+            deleteHandler={deleteTodoHandler}
+          />
+        </div>
       </div>
     </>
   );
