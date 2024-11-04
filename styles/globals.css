@@ -17,16 +17,18 @@
 }
 
 @layer utilities {
-  .search-bg {
-    background-image : url("/searchbar.svg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index : -5;
-  }
-
   .search-shadow {
     box-shadow: 5px 3px 1px  rgba(0, 0, 0);
+  }
+
+  .widget-label {
+    height : 3.5rem;
+    width : 6.25rem;
+  }
+
+  .todo-section {
+    grid-column-start : 1;
+    grid-column-end : 13;
   }
 }
 
@@ -39,40 +41,50 @@ html, body {
 body {
   font-family: 'NanumSquare';
   box-sizing: border-box;
+  width: 100vh
 }
 
 .container {
-  max-width: 120rem;
+  /* max-width: 120rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  
-  
+  justify-content: center;  
+  margin: 0 auto;
+  padding: 0 1.5rem; */
   max-width: 120rem;
-  
   margin: 0 auto;
   padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  
+
+}
 
   @media screen and (min-width : 1920px) { 
-    display: grid;
-    grid-template-columns: repeat(12, 78px);
-    grid-template-rows : 60px 100px 1fr;
-    column-gap: 24px;
+    .container {
+      display: grid;
+      grid-template-columns: repeat(12, 78px);
+      grid-template-rows : 60px 100px 1fr;
+      column-gap: 24px;
+    }
   }
 
   @media screen and (min-width : 744px) and (max-width : 1919px) {
-    
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows : 60px 100px 1fr;
-    column-gap: 16px; 
+    .container {
+      display: grid;
+      grid-template-columns: repeat(8, 73px);
+      grid-template-rows : 60px 100px 1fr;
+      column-gap: 16px; 
+    }
   }
 
   @media screen and (min-width : 375px) and (max-width : 743px) {
-    padding : 0 1rem;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows : 60px 100px 1fr;
-    column-gap: 8px;
+    .container {
+      padding : 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows : 60px 100px 1fr;
+      column-gap: 8px;
+    }
   }
-}

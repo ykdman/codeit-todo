@@ -1,10 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useState } from "react"
 import Searchbar from "@/components/SearchBar";
 import SearchButton from "@/components/SearchButton";
-import {  useState } from "react"
 
 export default function SearchWidget() {
+    const router = useRouter();
     const [newTodoName, setNewTodoname] = useState<string>("");
 
     const addTodoHandler = async (name : string) => {
@@ -19,6 +21,9 @@ export default function SearchWidget() {
         },
         body : JSON.stringify({name})
       })
+      
+      router.refresh();
+      setNewTodoname("");
     }
 
     const changeNewTodoName = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -28,9 +33,9 @@ export default function SearchWidget() {
 
 
     return (
-      <>
-        <Searchbar changeHandler={changeNewTodoName} todoName={newTodoName}/>
-        <SearchButton clickHandler={addTodoHandler} name={newTodoName}/>
-      </>
+        <>
+          <Searchbar changeHandler={changeNewTodoName} todoName={newTodoName}/>
+          <SearchButton clickHandler={addTodoHandler} name={newTodoName}/>
+        </>
     )
 }

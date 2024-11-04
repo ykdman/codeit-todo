@@ -1,6 +1,15 @@
+import { TaskStatus } from "@/config/enum";
+import TodoLabelSvg from "@/public/todoLabel.svg";
+import DoneLabelSvg from "@/public/doneLabel.svg";
+
 export default function Label ({title} : {title : string}) {
 
-  return <div className="col-start-1 row-start-3">
-    투두
-  </div>
+  return (
+    <>
+    {
+      title === TaskStatus.todo ? <TodoLabelSvg /> : <DoneLabelSvg />
+    }
+    </>
+  )
+  
 }

@@ -1,8 +1,8 @@
 export type Todo = {
   id : number;
-  tenantId : string;
+  tenantId? : string;
   name : string;
   memo? : string | null;
   imageUrl? : string | null;
-  isCompleted? : boolean;
+  isCompleted : boolean;
 }
