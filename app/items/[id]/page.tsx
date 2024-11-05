@@ -1,15 +1,21 @@
 import TodoItemDetail from "@/components/TodoItemDetail";
 import DetailWidget from "@/widget/DetailWidget";
 
-async function fetchTodo(id: number) {
-  console.log(id);
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${id}`, {
-    cache: "no-cache",
-  });
-  return await res.json();
-}
+export const dynamic = "force-dynamic";
 
-export default async function ItemPage({ params }: { params: { id: number } }) {
+export default async function ItemPage({
+  params,
+}: {
+  params: Promise<{ id: number }>;
+}) {
+  async function fetchTodo(id: number) {
+    console.log(id);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${id}`, {
+      cache: "no-cache",
+    });
+    return await res.json();
+  }
+
   const { id } = await params;
   const todo = await fetchTodo(Number(id));
 

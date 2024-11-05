@@ -12,8 +12,10 @@ export default function ImageItem({
 }) {
   console.log("이미지", currentTodo);
   // 파일 선택 및 업로드 핸들러
-  const handleFileChange = async (event) => {
-    const file = event.target.files[0];
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target!.files![0];
     console.log("파일존재 ?", file);
     if (file) {
       const formData = new FormData();
